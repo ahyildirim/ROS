@@ -145,7 +145,33 @@ ros2 pkg create --build-type ament_python my_first_pkg
 Her 0.5 saniyede bir `chatter` topic'ine mesaj yayınlar.
 
 ```python
-<orijinal talker.py içeriği>
+import rclpy #ros kütüphanesi eklenir
+from rclpy.node import Node #Node sınıfı importlanır
+from std_msgs.msg import String #Yayınlayacağımız mesajın tipi importlanır
+
+class MinimalPublisher(Node): #Kendi node sınıfıımzı tanımlıyoruz(ROS kütüphanesindeki Node sınıfını inherit eder)
+    def __init__(self): #Constructor ilk çağırıldığında bu fonksiyon çalışır.
+        super().__init__('talker') #inherit alınan node sınıfının constructoru çağırılarak sınıfa isim verilir.
+        self.publisher_ = self.create_publisher(String, 'chatter', 10) #publisher oluşturulur
+        self.timer = self.create_timer(0.5, self.timer_callback) #0.5 saniyede bir callback çağrılır
+        self.i = 0
+
+    def timer_callback(self):
+        msg = String()
+        msg.data = f'Hello ROS2! {self.i}'
+        self.publisher_.publish(msg)
+        self.get_logger().info(f'Publishing: "{msg.data}"')
+        self.i += 1
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = MinimalPublisher()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
 ```
 
 ---
@@ -156,7 +182,33 @@ Her 0.5 saniyede bir `chatter` topic'ine mesaj yayınlar.
 `chatter` topic'ini dinler ve mesajları terminale basar.
 
 ```python
-<orijinal listener.py içeriği>
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String
+
+class MinimalSubscriber(Node):
+    def __init__(self):
+        super().__init__('listener')
+        self.subscription = self.create_subscription(
+            String,
+            'chatter',
+            self.listener_callback,
+            10
+        )
+        self.subscription
+
+    def listener_callback(self, msg):
+        self.get_logger().info(f'I heard: "{msg.data}"')
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = MinimalSubscriber()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
 ```
 
 ---
@@ -169,7 +221,43 @@ Her 0.5 saniyede bir `chatter` topic'ine mesaj yayınlar.
 Parametreye bağlı sıcaklık simülasyonu üretir.
 
 ```python
-<orijinal temp_sensor.py içeriği>
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import Float32
+import random
+
+class SensorNode(Node):
+    def __init__(self):
+        super().__init__('sensor_node')
+
+        self.declare_parameter('publish_frequency', 1.0)
+        self.declare_parameter('temp_min', 20.0)
+        self.declare_parameter('temp_max', 30.0)
+
+        self.publisher_ = self.create_publisher(Float32, 'temperature', 10)
+
+        freq = self.get_parameter('publish_frequency').value
+        self.timer = self.create_timer(1.0 / freq, self.timer_callback)
+
+    def timer_callback(self):
+        tmin = self.get_parameter('temp_min').value
+        tmax = self.get_parameter('temp_max').value
+        temperature = random.uniform(tmin, tmax)
+
+        msg = Float32()
+        msg.data = temperature
+        self.publisher_.publish(msg)
+        self.get_logger().info(f'Sıcaklık: {temperature:.2f} °C')
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = SensorNode()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
 ```
 
 ---
@@ -180,7 +268,45 @@ Parametreye bağlı sıcaklık simülasyonu üretir.
 Sıcaklık değerlerini okuyarak uyarı üretir.
 
 ```python
-<orijinal display_node.py içeriği>
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import Float32
+
+class ListenerNode(Node):
+    def __init__(self):
+        super().__init__('listener_node')
+
+        self.declare_parameter('max_temp_warning_threshold', 28.0)
+        self.declare_parameter('min_temp_warning_threshold', 22.0)
+
+        self.subscription = self.create_subscription(
+            Float32,
+            'temperature',
+            self.listener_callback,
+            10
+        )
+        self.subscription
+
+    def listener_callback(self, msg):
+        max_threshold = self.get_parameter('max_temp_warning_threshold').value
+        min_threshold = self.get_parameter('min_temp_warning_threshold').value
+
+        if msg.data > max_threshold:
+            self.get_logger().warn(f'Yüksek sıcaklık: {msg.data:.2f} °C (eşik: {max_threshold})')
+        elif msg.data < min_threshold:
+            self.get_logger().warn(f'Düşük sıcaklık: {msg.data:.2f} °C (eşik: {min_threshold})')
+        else:
+            self.get_logger().info(f'Normal sıcaklık: {msg.data:.2f} °C')
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = ListenerNode()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
 ```
 
 ---
