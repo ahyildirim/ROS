@@ -1,0 +1,27 @@
+[0.613s] Invoking command in '/home/ahyildir/ros2_ws/build/my_first_pkg': PYTHONPATH=/home/ahyildir/ros2_ws/build/my_first_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/ahyildir/ros2_ws/build/my_first_pkg/build --no-deps symlink_data
+[0.826s] running develop
+[0.962s] running egg_info
+[0.963s] creating my_first_pkg.egg-info
+[0.971s] writing my_first_pkg.egg-info/PKG-INFO
+[0.972s] writing dependency_links to my_first_pkg.egg-info/dependency_links.txt
+[0.972s] writing entry points to my_first_pkg.egg-info/entry_points.txt
+[0.973s] writing requirements to my_first_pkg.egg-info/requires.txt
+[0.973s] writing top-level names to my_first_pkg.egg-info/top_level.txt
+[0.973s] writing manifest file 'my_first_pkg.egg-info/SOURCES.txt'
+[0.990s] reading manifest file 'my_first_pkg.egg-info/SOURCES.txt'
+[0.991s] writing manifest file 'my_first_pkg.egg-info/SOURCES.txt'
+[1.001s] running build_ext
+[1.001s] Creating /home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages/my-first-pkg.egg-link (link to .)
+[1.002s] Installing display_node script to /home/ahyildir/ros2_ws/install/my_first_pkg/lib/my_first_pkg
+[1.002s] Installing temp_sensor script to /home/ahyildir/ros2_ws/install/my_first_pkg/lib/my_first_pkg
+[1.002s] 
+[1.003s] Installed /home/ahyildir/ros2_ws/build/my_first_pkg
+[1.003s] running symlink_data
+[1.003s] creating /home/ahyildir/ros2_ws/install/my_first_pkg/share/ament_index
+[1.003s] creating /home/ahyildir/ros2_ws/install/my_first_pkg/share/ament_index/resource_index
+[1.004s] creating /home/ahyildir/ros2_ws/install/my_first_pkg/share/ament_index/resource_index/packages
+[1.004s] symbolically linking /home/ahyildir/ros2_ws/build/my_first_pkg/resource/my_first_pkg -> /home/ahyildir/ros2_ws/install/my_first_pkg/share/ament_index/resource_index/packages
+[1.004s] symbolically linking /home/ahyildir/ros2_ws/build/my_first_pkg/package.xml -> /home/ahyildir/ros2_ws/install/my_first_pkg/share/my_first_pkg
+[1.004s] creating /home/ahyildir/ros2_ws/install/my_first_pkg/share/my_first_pkg/launch
+[1.005s] symbolically linking /home/ahyildir/ros2_ws/build/my_first_pkg/launch/sensor_system.launch.py -> /home/ahyildir/ros2_ws/install/my_first_pkg/share/my_first_pkg/launch
+[1.031s] Invoked command in '/home/ahyildir/ros2_ws/build/my_first_pkg' returned '0': PYTHONPATH=/home/ahyildir/ros2_ws/build/my_first_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/ahyildir/ros2_ws/build/my_first_pkg/build --no-deps symlink_data

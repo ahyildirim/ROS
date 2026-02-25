@@ -1,0 +1,7 @@
+[console_scripts]
+depth_controller = my_first_pkg.depth_controller:main
+display_node = my_first_pkg.display_node:main
+fusion_node = my_first_pkg.fusion_node:main
+imu_node = my_first_pkg.imu_node:main
+motor_sim_node = my_first_pkg.motor_sim_node:main
+temp_sensor = my_first_pkg.temp_sensor:main

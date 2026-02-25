@@ -1,0 +1,5 @@
+  File "/home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages/my_first_pkg/fusion_node.py", line 2
+    import rclpy.node import Node
+                      ^^^^^^
+SyntaxError: invalid syntax
+

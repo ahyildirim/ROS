@@ -1,0 +1,101 @@
+[0.000000] (-) TimerEvent: {}
+[0.001408] (my_first_pkg) JobQueued: {'identifier': 'my_first_pkg', 'dependencies': OrderedDict()}
+[0.001648] (my_first_pkg) JobStarted: {'identifier': 'my_first_pkg'}
+[0.100398] (-) TimerEvent: {}
+[0.201390] (-) TimerEvent: {}
+[0.304772] (-) TimerEvent: {}
+[0.437264] (-) TimerEvent: {}
+[0.541368] (-) TimerEvent: {}
+[0.645672] (-) TimerEvent: {}
+[0.748167] (-) TimerEvent: {}
+[0.850063] (-) TimerEvent: {}
+[0.950488] (-) TimerEvent: {}
+[1.053378] (-) TimerEvent: {}
+[1.153827] (-) TimerEvent: {}
+[1.254469] (-) TimerEvent: {}
+[1.356549] (-) TimerEvent: {}
+[1.457357] (-) TimerEvent: {}
+[1.558334] (-) TimerEvent: {}
+[1.659071] (-) TimerEvent: {}
+[1.781062] (-) TimerEvent: {}
+[1.882481] (-) TimerEvent: {}
+[1.986239] (-) TimerEvent: {}
+[2.088279] (-) TimerEvent: {}
+[2.195883] (-) TimerEvent: {}
+[2.298326] (-) TimerEvent: {}
+[2.402516] (-) TimerEvent: {}
+[2.503418] (-) TimerEvent: {}
+[2.604798] (-) TimerEvent: {}
+[2.706320] (-) TimerEvent: {}
+[2.807723] (-) TimerEvent: {}
+[2.908527] (-) TimerEvent: {}
+[3.009441] (-) TimerEvent: {}
+[3.119420] (-) TimerEvent: {}
+[3.223017] (-) TimerEvent: {}
+[3.323826] (-) TimerEvent: {}
+[3.425313] (-) TimerEvent: {}
+[3.534586] (-) TimerEvent: {}
+[3.636060] (-) TimerEvent: {}
+[3.738108] (-) TimerEvent: {}
+[3.849783] (-) TimerEvent: {}
+[3.950843] (-) TimerEvent: {}
+[4.051667] (-) TimerEvent: {}
+[4.153703] (-) TimerEvent: {}
+[4.263422] (-) TimerEvent: {}
+[4.370042] (-) TimerEvent: {}
+[4.471197] (-) TimerEvent: {}
+[4.576376] (-) TimerEvent: {}
+[4.681007] (-) TimerEvent: {}
+[4.783202] (-) TimerEvent: {}
+[4.889070] (-) TimerEvent: {}
+[4.940684] (my_first_pkg) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/my_first_pkg', 'build', '--build-base', '/home/ahyildir/ros2_ws/build/my_first_pkg/build', 'install', '--record', '/home/ahyildir/ros2_ws/build/my_first_pkg/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/ahyildir/ros2_ws/src/my_first_pkg', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'ahyildir', 'SSH_CLIENT': '192.168.1.106 59895 4242', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '2', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'LESS': '-R', 'MOTD_SHOWN': 'pam', 'HOME': '/home/ahyildir', 'OLDPWD': '/home/ahyildir/ros2_ws/src', 'SSH_TTY': '/dev/pts/2', 'LSCOLORS': 'Gxfxcxdxbxegedabagacad', 'ZSH': '/home/ahyildir/.oh-my-zsh', 'ROS_PYTHON_VERSION': '3', 'PAGER': 'less', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'ROS_DISTRO': 'humble', 'LOGNAME': 'ahyildir', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '4', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ahyildir/.venv/bin:/home/ahyildir/.local/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/opt/ros/humble', 'SHELL': '/usr/bin/zsh', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/home/ahyildir/ros2_ws/build/my_first_pkg', 'LC_ALL': 'en_US.UTF-8', 'SSH_CONNECTION': '192.168.1.106 59895 192.168.1.111 4242', 'PYTHONPATH': '/home/ahyildir/ros2_ws/build/my_first_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1'}, 'shell': False}
+[5.011014] (-) TimerEvent: {}
+[5.118774] (-) TimerEvent: {}
+[5.167557] (my_first_pkg) StdoutLine: {'line': b'running egg_info\n'}
+[5.181380] (my_first_pkg) StdoutLine: {'line': b'writing ../../build/my_first_pkg/my_first_pkg.egg-info/PKG-INFO\n'}
+[5.182389] (my_first_pkg) StdoutLine: {'line': b'writing dependency_links to ../../build/my_first_pkg/my_first_pkg.egg-info/dependency_links.txt\n'}
+[5.183878] (my_first_pkg) StdoutLine: {'line': b'writing entry points to ../../build/my_first_pkg/my_first_pkg.egg-info/entry_points.txt\n'}
+[5.183988] (my_first_pkg) StdoutLine: {'line': b'writing requirements to ../../build/my_first_pkg/my_first_pkg.egg-info/requires.txt\n'}
+[5.184052] (my_first_pkg) StdoutLine: {'line': b'writing top-level names to ../../build/my_first_pkg/my_first_pkg.egg-info/top_level.txt\n'}
+[5.216728] (my_first_pkg) StdoutLine: {'line': b"reading manifest file '../../build/my_first_pkg/my_first_pkg.egg-info/SOURCES.txt'\n"}
+[5.224661] (-) TimerEvent: {}
+[5.228112] (my_first_pkg) StdoutLine: {'line': b"writing manifest file '../../build/my_first_pkg/my_first_pkg.egg-info/SOURCES.txt'\n"}
+[5.228780] (my_first_pkg) StdoutLine: {'line': b'running build\n'}
+[5.229062] (my_first_pkg) StdoutLine: {'line': b'running build_py\n'}
+[5.229347] (my_first_pkg) StdoutLine: {'line': b'copying my_first_pkg/fusion_node.py -> /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg\n'}
+[5.229624] (my_first_pkg) StdoutLine: {'line': b'copying my_first_pkg/imu_node.py -> /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg\n'}
+[5.229894] (my_first_pkg) StdoutLine: {'line': b'copying my_first_pkg/depth_node.py -> /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg\n'}
+[5.230072] (my_first_pkg) StdoutLine: {'line': b'copying my_first_pkg/__init__.py -> /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg\n'}
+[5.230402] (my_first_pkg) StdoutLine: {'line': b'copying my_first_pkg/display_node.py -> /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg\n'}
+[5.230602] (my_first_pkg) StdoutLine: {'line': b'copying my_first_pkg/temp_sensor.py -> /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg\n'}
+[5.231106] (my_first_pkg) StdoutLine: {'line': b'running install\n'}
+[5.235452] (my_first_pkg) StdoutLine: {'line': b'running install_lib\n'}
+[5.250927] (my_first_pkg) StdoutLine: {'line': b'copying /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg/fusion_node.py -> /home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages/my_first_pkg\n'}
+[5.251246] (my_first_pkg) StdoutLine: {'line': b'copying /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg/depth_node.py -> /home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages/my_first_pkg\n'}
+[5.252196] (my_first_pkg) StdoutLine: {'line': b'byte-compiling /home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages/my_first_pkg/fusion_node.py to fusion_node.cpython-310.pyc\n'}
+[5.252468] (my_first_pkg) StderrLine: {'line': b'  File "/home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages/my_first_pkg/fusion_node.py", line 2\n'}
+[5.252611] (my_first_pkg) StderrLine: {'line': b'    import rclpy.node import Node\n'}
+[5.252792] (my_first_pkg) StderrLine: {'line': b'                      ^^^^^^\n'}
+[5.253118] (my_first_pkg) StderrLine: {'line': b'SyntaxError: invalid syntax\n'}
+[5.253508] (my_first_pkg) StderrLine: {'line': b'\n'}
+[5.253823] (my_first_pkg) StdoutLine: {'line': b'byte-compiling /home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages/my_first_pkg/depth_node.py to depth_node.cpython-310.pyc\n'}
+[5.254064] (my_first_pkg) StdoutLine: {'line': b'running install_data\n'}
+[5.254176] (my_first_pkg) StdoutLine: {'line': b'copying resource/my_first_pkg -> /home/ahyildir/ros2_ws/install/my_first_pkg/share/ament_index/resource_index/packages\n'}
+[5.254521] (my_first_pkg) StdoutLine: {'line': b'copying package.xml -> /home/ahyildir/ros2_ws/install/my_first_pkg/share/my_first_pkg\n'}
+[5.254631] (my_first_pkg) StdoutLine: {'line': b'copying /home/ahyildir/ros2_ws/src/my_first_pkg/launch/sensor_system.launch.py -> /home/ahyildir/ros2_ws/install/my_first_pkg/share/my_first_pkg/launch\n'}
+[5.254736] (my_first_pkg) StdoutLine: {'line': b'running install_egg_info\n'}
+[5.270966] (my_first_pkg) StdoutLine: {'line': b"removing '/home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages/my_first_pkg-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[5.271479] (my_first_pkg) StdoutLine: {'line': b'Copying ../../build/my_first_pkg/my_first_pkg.egg-info to /home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages/my_first_pkg-0.0.0-py3.10.egg-info\n'}
+[5.279271] (my_first_pkg) StdoutLine: {'line': b'running install_scripts\n'}
+[5.326153] (-) TimerEvent: {}
+[5.405784] (my_first_pkg) StdoutLine: {'line': b'Installing depth_node script to /home/ahyildir/ros2_ws/install/my_first_pkg/lib/my_first_pkg\n'}
+[5.406752] (my_first_pkg) StdoutLine: {'line': b'Installing display_node script to /home/ahyildir/ros2_ws/install/my_first_pkg/lib/my_first_pkg\n'}
+[5.406895] (my_first_pkg) StdoutLine: {'line': b'Installing fusion_node script to /home/ahyildir/ros2_ws/install/my_first_pkg/lib/my_first_pkg\n'}
+[5.407028] (my_first_pkg) StdoutLine: {'line': b'Installing imu_node script to /home/ahyildir/ros2_ws/install/my_first_pkg/lib/my_first_pkg\n'}
+[5.409027] (my_first_pkg) StdoutLine: {'line': b'Installing temp_sensor script to /home/ahyildir/ros2_ws/install/my_first_pkg/lib/my_first_pkg\n'}
+[5.409549] (my_first_pkg) StdoutLine: {'line': b"writing list of installed files to '/home/ahyildir/ros2_ws/build/my_first_pkg/install.log'\n"}
+[5.438171] (my_first_pkg) CommandEnded: {'returncode': 0}
+[5.439066] (-) TimerEvent: {}
+[5.541332] (-) TimerEvent: {}
+[5.563269] (my_first_pkg) JobEnded: {'identifier': 'my_first_pkg', 'rc': 0}
+[5.564169] (-) EventReactorShutdown: {}

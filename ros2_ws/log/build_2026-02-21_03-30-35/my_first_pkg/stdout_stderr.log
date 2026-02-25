@@ -1,0 +1,42 @@
+running egg_info
+writing ../../build/my_first_pkg/my_first_pkg.egg-info/PKG-INFO
+writing dependency_links to ../../build/my_first_pkg/my_first_pkg.egg-info/dependency_links.txt
+writing entry points to ../../build/my_first_pkg/my_first_pkg.egg-info/entry_points.txt
+writing requirements to ../../build/my_first_pkg/my_first_pkg.egg-info/requires.txt
+writing top-level names to ../../build/my_first_pkg/my_first_pkg.egg-info/top_level.txt
+reading manifest file '../../build/my_first_pkg/my_first_pkg.egg-info/SOURCES.txt'
+writing manifest file '../../build/my_first_pkg/my_first_pkg.egg-info/SOURCES.txt'
+running build
+running build_py
+copying my_first_pkg/depth_controller.py -> /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg
+copying my_first_pkg/fusion_node.py -> /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg
+copying my_first_pkg/imu_node.py -> /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg
+copying my_first_pkg/motor_sim_node.py -> /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg
+copying my_first_pkg/depth_node.py -> /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg
+copying my_first_pkg/__init__.py -> /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg
+copying my_first_pkg/display_node.py -> /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg
+copying my_first_pkg/temp_sensor.py -> /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg
+running install
+running install_lib
+copying /home/ahyildir/ros2_ws/build/my_first_pkg/build/lib/my_first_pkg/motor_sim_node.py -> /home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages/my_first_pkg
+byte-compiling /home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages/my_first_pkg/motor_sim_node.py to motor_sim_node.cpython-310.pyc
+  File "/home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages/my_first_pkg/motor_sim_node.py", line 11
+    self depth_pub = self.create_publisher(Float32, '/depth/data', 10)
+         ^^^^^^^^^
+SyntaxError: invalid syntax
+
+running install_data
+copying resource/my_first_pkg -> /home/ahyildir/ros2_ws/install/my_first_pkg/share/ament_index/resource_index/packages
+copying package.xml -> /home/ahyildir/ros2_ws/install/my_first_pkg/share/my_first_pkg
+copying /home/ahyildir/ros2_ws/src/my_first_pkg/launch/sensor_system.launch.py -> /home/ahyildir/ros2_ws/install/my_first_pkg/share/my_first_pkg/launch
+running install_egg_info
+removing '/home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages/my_first_pkg-0.0.0-py3.10.egg-info' (and everything under it)
+Copying ../../build/my_first_pkg/my_first_pkg.egg-info to /home/ahyildir/ros2_ws/install/my_first_pkg/lib/python3.10/site-packages/my_first_pkg-0.0.0-py3.10.egg-info
+running install_scripts
+Installing depth_controller script to /home/ahyildir/ros2_ws/install/my_first_pkg/lib/my_first_pkg
+Installing display_node script to /home/ahyildir/ros2_ws/install/my_first_pkg/lib/my_first_pkg
+Installing fusion_node script to /home/ahyildir/ros2_ws/install/my_first_pkg/lib/my_first_pkg
+Installing imu_node script to /home/ahyildir/ros2_ws/install/my_first_pkg/lib/my_first_pkg
+Installing motor_sim_node script to /home/ahyildir/ros2_ws/install/my_first_pkg/lib/my_first_pkg
+Installing temp_sensor script to /home/ahyildir/ros2_ws/install/my_first_pkg/lib/my_first_pkg
+writing list of installed files to '/home/ahyildir/ros2_ws/build/my_first_pkg/install.log'
