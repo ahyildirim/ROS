@@ -1,7 +1,4 @@
-# ROS2 Eğitim Notları – Yapılandırılmış README
-
-> Bu doküman, ROS2 öğrenme sürecimde tuttuğum **kişisel notlar**ın daha **okunabilir, düzenli ve erişilebilir** hale getirilmiş versiyonudur.
-> **İçerik korunmuştur**, sadece başlıklandırma, bölümlendirme ve navigasyon iyileştirilmiştir.
+# ROS2 Eğitim Notları
 
 ---
 
@@ -35,6 +32,8 @@
 
   * [10.1 IMU Node](#101-imu-node)
   * [10.2 Fusion Node](#102-fusion-node)
+  * [10.3 Depth Controller Node](#103-depth-controller-node)
+  * [10.4 Motor Simulation Node](#104-motor-simulation-node)
 
 ---
 
@@ -413,7 +412,7 @@ ros2 topic echo /topicadı
 
 # 10. Sensör Simülasyonları
 
-## 10.1 IMU Sensör
+## 10.1 IMU Node
 
 📄 **imu_node.py** IMU(İvme ve Gyro) sensör verilerini random olarak gürültü ile birlikte üretir ve `/imu/data` topicine yayınlar
 
@@ -522,6 +521,123 @@ def main(args=None):
     fusion_node.destroy_node()
     rclpy.shutdown()
     
+if __name__ == '__main__':
+    main()
+```
+
+---
+
+## 10.3 Depth Controller Node
+
+📄 **depth_controller.py** Aracın hedef derinlikte kalması için, sensör füzyonundan gelen veriyi okur ve PD kontrol döngüsünü kullanarak motorlara güç iletir.
+
+```python
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import Float32
+from geometry_msgs.msg import Vector3
+
+class DepthController(Node):
+    def __init__(self):
+        super().__init__('depth_controller')
+
+        self.state_sub = self.create_subscription(Vector3, '/state_estimate', self.state_callback, 10)
+
+        self.motor_pub = self.create_publisher(Float32, '/motor_cmd', 10)
+
+        self.target_depth = 2.0 #Hedef derinlik
+        self.kp = 5.0 #Oransal kazanç. arttıkça motora daha fazla güç vererek aracı hedefe iter.
+        self.kd = 2.0 #Türevsel kazanç. Aracın hızına karşı direnç oluşturur. Amacı, hedefe yaklaşırken aracı yavaşlatarak salınımı engellemektir.
+
+        self.last_error = 0.0
+
+        self.get_logger().info('Depth Controller Node started')
+
+    def state_callback(self, msg):
+        #Abone olunan topicten derinlik ve hız bilgileri çekilir.
+        current_depth = msg.y
+        vertical_velocity = msg.z
+
+        error = self.target_depth - current_depth #Hedeflenen nokta ile bulunulan nokta arasındaki fark.
+        derivative = -vertical_velocity #Hatanın türevini matematiksel olarak hesaplamak yerine, doğrudan fiziksel dikey hızın tersini kullanmak çok daha kararlı sonuçlar verir. Bu sayede hedef derinlik aniden değişse bile motorlarda ani bir sıçrama oluşmaz.
+        output = self.kp * error + self.kd * derivative #PD Formülü: İtici güç ile frenleyici gücün toplamı.
+
+        output = max(min(output, 1.0), -1.0) #Saturation (Doyum): Motor komutunu %-100 ile %+100 sınırları içinde tutar.
+        motor_msg = Float32()
+        motor_msg.data = output
+
+        self.motor_pub.publish(motor_msg)
+
+def main(args=None):
+    rclpy.init(args=args)
+    depth_controller = DepthController()
+    rclpy.spin(depth_controller)
+    depth_controller.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+```
+
+---
+
+## 10.4 Motor Simulation Node
+
+📄 **motor_sim_node.py** ROV'un su içerisindeki hareketlerini taklit eden bir simülasyon nodeu. `/motor_cmd` topicinden gelen motor verilerini okur, suyun direncini hesaplayarak yeni gerçekçi derinlik oluşturur.
+> Not: Gerçek hayatta bu node bulunmaz. Burada sadece derinliği simüle etmek için kullanılmıştır.
+
+```python
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import Float32
+
+class MotorSimNode(Node):
+    def __init__(self):
+        super().__init__('motor_sim_node')
+
+        self.motor_sub = self.create_subscription(Float32, '/motor_cmd', self.motor_callback, 10)
+
+        self.depth_pub = self.create_publisher(Float32, '/depth/data', 10)
+
+        self.timer = self.create_timer(0.1, self.update_physics)
+
+        self.depth = 0.0
+        self.velocity = 0.0
+        self.motor_cmd = 0.0
+
+        self.thrust_gain = 2.0
+        self.damping = 0.8
+        self.dt = 0.1
+
+        self.get_logger().info('Motor Sim Node started')
+
+    def motor_callback(self, msg):
+        self.motor_cmd = msg.data
+
+    def update_physics(self):
+        acceleration = self.motor_cmd * self.thrust_gain
+        self.velocity += acceleration * self.dt
+
+        self.velocity *= self.damping
+
+        self.depth += self.velocity * self.dt
+
+        if self.depth < 0.0:
+            self.depth = 0.0
+            self.velocity = 0.0
+
+        msg = Float32()
+        msg.data = self.depth
+
+        self.depth_pub.publish(msg)
+
+def main(args=None):
+    rclpy.init(args=args)
+    motor_sim_node = MotorSimNode()
+    rclpy.spin(motor_sim_node)
+    motor_sim_node.destroy_node()
+    rclpy.shutdown()
+
 if __name__ == '__main__':
     main()
 ```
