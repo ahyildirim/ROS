@@ -31,6 +31,10 @@
 * [7. Runtime Parametre Güncelleme](#7-runtime-parametre-güncelleme)
 * [8. Launch Dosyası ile Tüm Sistemi Çalıştırma](#8-launch-dosyası-ile-tüm-sistemi-çalıştırma)
 * [9. Faydalı ROS Komutları](#9-faydalı-ros-komutları)
+* [10. Sensör Simülasyonları](#10-sensör-simülasyonları)
+
+  * [10.1 IMU Node](#101-imu-node)
+  * [10.2 Fusion Node](#102-fusion-node)
 
 ---
 
@@ -407,7 +411,117 @@ ros2 topic echo /topicadı
 
 ---
 
+# 10. Sensör Simülasyonları
 
-amaçlı hazırlanmıştır.
+## 10.1 IMU Sensör
 
-> İleri ROS projeleri (SLAM, Navigation, Robot Control, Gazebo, RViz) için güçlü bir temel oluşturur.
+📄 **imu_node.py** IMU(İvme ve Gyro) sensör verilerini random olarak gürültü ile birlikte üretir ve `/imu/data` topicine yayınlar
+
+```python
+import rclpy
+from rclpy.node import Node
+from sensor_msgs.msg import Imu
+import random
+
+class ImuNode(Node):
+    def __init__(self):
+        super().__init__('imu_node')
+        
+        self.publisher = self.create_publisher(Imu, '/imu/data', 10)
+        self.timer = self.create_timer(0.02, self.publish_imu)
+
+        self.get_logger().info('IMU Node started')
+
+    def publish_imu(self):
+        msg = Imu()
+
+        msg.header.stamp = self.get_clock().now().to_msg()
+        msg.header.frame_id = "imu_link"
+
+        #GYRO
+        msg.angular_velocity.x = random.gauss(0.0, 0.01)
+        msg.angular_velocity.y = random.gauss(0.0, 0.01)
+        msg.angular_velocity.z = random.gauss(0.0, 0.05)
+
+        #İVMEÖLÇER
+        msg.linear_acceleration.x = random.gauss(0.0, 0.1)
+        msg.linear_acceleration.y = random.gauss(0.0, 0.1)
+        msg.linear_acceleration.z = 9.81 + random.gauss(0.0, 0.1)
+
+        self.publisher.publish(msg)
+    
+def main(args=None):
+        rclpy.init(args=args)
+        imu_node = ImuNode()
+        rclpy.spin(imu_node)
+        imu_node.destroy_node()
+        rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+```
+
+---
+
+## 10.2 Fusion Node
+
+📄 **fusion_node.py** `/imu/data` ve `/depth/data` topiclerine abone olur, verileri birleştirerek 3D vektöre yazar ve `/state_estimate` topicine yayınlar.
+> Not: `/depth/data`, gerçeği yansıtmak ve sistemin kapalı çevrim olması amacıyla motor hareketlerinden sonra gerçekçi fiziklerle yayınlanacaktır.
+
+```python
+import rclpy
+from rclpy.node import Node
+from sensor_msgs.msg import Imu
+from std_msgs.msg import Float32
+from geometry_msgs.msg import Vector3
+import math
+
+class FusionNode(Node):
+    def __init__(self):
+        super().__init__('fusion_node')
+
+        self.imu_sub = self.create_subscription(Imu, '/imu/data', self.imu_callback, 10)
+
+        self.depth_sub = self.create_subscription(Float32, '/depth/data', self.depth_callback, 10)
+
+        self.state_pub = self.create_publisher(Vector3, '/state_estimate', 10)
+
+        self.current_yaw = 0.0
+        self.current_depth = 0.0
+        self.last_depth = 0.0
+        self.vertical_velocity = 0.0
+
+        self.timer = self.create_timer(0.1, self.publish_state)
+
+        self.get_logger().info('Fusion Node started')
+
+    def imu_callback(self, msg):
+        q = msg.orientation
+        #IMU sensörünün ürettiği Quaternion(x,y,z,w) formatını Euler(Roll, Pitch, Yaw) formatına çevirir
+        siny_cosp = 2.0 * (q.w * q.z + q.x * q.y)
+        cosy_cosp = 1.0 - 2.0 * (q.y * q.y + q.z * q.z)
+        self.current_yaw = math.atan2(siny_cosp, cosy_cosp)
+
+    def depth_callback(self, msg):
+        self.current_depth = msg.data
+        self.vertical_velocity = (self.current_depth - self.last_depth) / 0.1
+        self.last_depth = self.current_depth
+
+    def publish_state(self):
+        state = Vector3()
+        state.x = self.current_yaw
+        state.y = self.current_depth
+        state.z = self.vertical_velocity
+
+        self.state_pub.publish(state)
+
+def main(args=None):
+    rclpy.init(args=args)
+    fusion_node = FusionNode()
+    rclpy.spin(fusion_node)
+    fusion_node.destroy_node()
+    rclpy.shutdown()
+    
+if __name__ == '__main__':
+    main()
+```
